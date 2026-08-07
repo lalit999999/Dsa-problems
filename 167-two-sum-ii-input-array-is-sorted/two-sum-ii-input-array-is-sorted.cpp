@@ -1,22 +1,18 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
-        int n = numbers.size();
-
-        int i = 0;
-        int j = n - 1;
-
-        while(i < j) {
-            int sum = numbers[i] + numbers[j];
-
-            if (sum < target) {
-                i++;
-            } else if ( sum > target) {
-                j--;
-            } else {
-                return {i + 1, j + 1};
-            }
+        map<int ,int > m;
+        for (int i = 0 ; i < numbers.size() ; i++){
+            m[numbers[i]] = i + 1;
         }
-        return {};
+        vector<int> res = {};
+        for (int i = 0 ; i < numbers.size() ; i++){
+            int x = m[target - numbers[i]];
+           if(x && (x != (i+1))){
+            if(x < i+1) res = { x , i+1};
+            else res = {  i+1 , x};
+           }
+        }
+        return res;
     }
 };
